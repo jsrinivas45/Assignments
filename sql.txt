@@ -1,0 +1,134 @@
+/* creatig sample datatabase */
+create database sample;
+
+ /* craeting a Customer Table */
+
+ create table Customer(id int, firstname nvarchar(40) not null, lastname nvarchar(40), city nvarchar(40), country nvarchar(40), phone nvarchar(20), 
+  constraint pk_primarykey primary key clustered(id));
+
+/* creating customer index */					  
+  create index indexcustomername on Customer(firstname, lastname); 
+
+/* creating orders table */
+  create table Orders(Id int, orderdate datetime not null, ordernumber nvarchar(10), customerid int, totalamount decimal(12,2)
+  constraint pk_primarykey_orders primary key clustered(id),
+ constraint fk_foreignkey foreign key (customerid) references Customer(id));
+
+/*creating index for orders table */					  
+  create index indexordercustomerid on Orders(customerid);
+ create index indexorderorderdate on Orders(orderdate);
+
+/*creating product table */					  
+create table product (id int, productname nvarchar(50), unitprice decimal(12,2), package nvarchar(30), isdiscounted bit,
+constraint pk_primarykey_product primary key (id));
+
+					 
+/*creating index for orders table */
+ create index indexproductsupplierid on Product(id);
+create index indexproductname on Product(productname);
+
+/*creating table for orderitem */
+ create table orderitem (id int, orderid int, productid int, unitprice decimal(12,2), quantity int,
+ constraint pk_primarykey_orderitem primary key(id),
+ constraint fk_foreignkey_orderitem foreign key(orderid) references Orders(id),
+ constraint fk_foreignkey_orderitem1 foreign key(productid) references Product(id));
+
+/*creating index for orderitem */
+create index indexorderitemorderid on orderitem(id);
+create index ondexorderitemproductid on orderitem(productid);
+
+
+/*insert into customer values */
+  insert into customer(id, firstname, lastname, city, country, phone)
+  values (7001 , 'Suresh', 'Vipparla', 'Hyderabad', 'India', '+91-7993124984');
+ insert into customer(id, firstname, lastname, city, country, phone)
+ values (7002 , 'kumar', 'Vipparla', 'Andhrapradesh', 'India', '+91-7659950594');
+  insert into customer(id, firstname, lastname, city, country, phone)
+values (7003 , 'Smith', 'John', 'Toronto', 'Germany', '+23-140258674');
+  insert into customer(id, firstname, lastname, city, country, phone)
+ values (7004 , 'steav', 'harry', 'texas', 'Germany', '+14-62354834');
+ insert into customer(id, firstname, lastname, city, country, phone)
+values (7005 , 'Annie', 'Joseph', 'Toronto', 'Russia', '+23-140258674');
+ insert into customer(id, firstname, lastname, city, country, phone)
+ values (7006 , 'Immanuel', 'Raju', 'texas', 'Germany', '');
+					           
+								 
+/* insert into orders value */
+ insert into orders(id, orderdate, ordernumber, customerid, totalamount)
+values(201, 04/04/2022, '30001', 7001, 96789.12);
+insert into orders(id, orderdate, ordernumber, customerid, totalamount)
+values(202, 05/04/2022, '30002', 7002, 96781.12);
+insert into orders(id, orderdate, ordernumber, customerid, totalamount)
+values(203, 06/04/2022, '30003', 7003, 96782.22);
+insert into orders(id, orderdate, ordernumber, customerid, totalamount)
+values(204, 07/04/2022, '30004', 7004, 96783.33);
+								 
+								
+								
+								
+								
+								
+/*insert into product values */								
+insert into product (id, productname, unitprice, package, isdiscounted)
+values(101, 'Apple Laptop', 36798.23, 'Laptops', 0);
+insert into product (id, productname, unitprice, package, isdiscounted)
+values(102, 'dell Laptop', 37798.79, 'Laptops', 1);
+insert into product (id, productname, unitprice, package, isdiscounted)
+values(103, 'Apple Tab', 15000.25, 'mobile', 0);
+insert into product (id, productname, unitprice, package, isdiscounted)
+values(104, ' Samsung', 10000.23, 'mobile', 1);
+
+
+
+
+/*insert orderitem values */
+ insert into orderitem(id, orderid, productid, unitprice, quantity)
+ values(401, 201, 101, 36789.23, 2); 
+ insert into orderitem(id, orderid, productid, unitprice, quantity)
+values(402, 202, 102, 37798.79, 1); 
+insert into orderitem(id, orderid, productid, unitprice, quantity)
+values(403, 203, 103, 15000.25, 2); 
+insert into orderitem(id, orderid, productid, unitprice, quantity) 
+values(404, 204, 104, 10000.23, 3); 
+
+								 
+
+
+/*1.In Customer table FirstName Attribute should not accept null value*/
+drop index IndexCustomerName on Customer;
+ALTER TABLE Customer alter COLUMN FirstName nvarchar(40) NOT NULL;
+
+/*2.In Order table OrderDate should not accept null value*/
+drop index IndexOrderOrderDate on [Order];
+ALTER TABLE [Order] alter COLUMN OrderDate datetime NOT NULL;
+
+/*3.Display all customer details*/
+select * from customer
+						
+/*4.write a query to display Country whose name starts with A or I */
+select * from customer where firstname like 'A%' or firstname like 'I%';
+
+/*5 .write a query to display whose name of customer whose third character is I */
+select * from customer where firstname like '__i%';
+
+/*6. Display the details from Customer table who is from country Germany*/
+select * from customer where country = 'Germany';
+
+/*7. Display the fullname of the employee */
+select firstname +' '+ lastname from Customer;
+
+/*8 .displat the customer details whose name holds second letter as u */
+select * from customer where firstname like '_U%';
+
+/*9 .select order details where unit price is greater then 10 and less then 20 */								 
+select * from orderitem where unitprice > 10 and unitprice < 20
+
+/*11. Display orders details which contains Order date and arrange the order by date*/
+select * 
+from [orders]
+Orders By OrderDate;
+
+/*11. print the average quantity ordered for every product */
+select AVG(quantity) from orderitem group by productid;
+
+

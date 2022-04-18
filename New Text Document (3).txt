@@ -1,0 +1,178 @@
+using System;
+
+namespace Employee
+{
+	// Create a class
+	class Employee
+	{
+		// Data Members
+		int employeeNumber;
+		string name;
+		string dateOfHire;
+		string jobDescription;
+		string department;
+		double monthlySalary;
+
+		// Default constructor
+		public Employee()
+		{
+			this.employeeNumber = 0;
+			this.name = "";
+			this.dateOfHire = "";
+			this.jobDescription = "";
+			this.department = "";
+			this.monthlySalary = 0.00;
+		}
+
+		// Parameter constructor
+		public Employee(int employeeNumber, string name, string dateOfHire, string JobDescription, string department, double monthlySalary)
+		{
+			this.employeeNumber = employeeNumber;
+			this.name = name;
+			this.dateOfHire = dateOfHire;
+			this.jobDescription = JobDescription;
+			this.department = department;
+			this.monthlySalary = monthlySalary;
+		}
+
+
+		// Properties for the data members
+		public int EmployeeNumber
+		{
+			get
+			{
+				return employeeNumber;
+			}
+			set
+			{
+				employeeNumber = value;
+			}
+		}
+
+		public string Name
+		{
+			get
+			{
+				return name;
+			}
+			set
+			{
+				name = value;
+			}
+		}
+
+		public string DateOfHire
+		{
+			get
+			{
+				return dateOfHire;
+			}
+			set
+			{
+				dateOfHire = value;
+			}
+		}
+
+
+		public string Department
+		{
+			get
+			{
+				return department;
+			}
+			set
+			{
+				department = value;
+			}
+		}
+		public string JobDescription
+		{
+			get
+			{
+				return jobDescription;
+			}
+			set
+			{
+				jobDescription = value;
+			}
+		}
+
+		public double MonthlySalary
+		{
+			get
+			{
+				return monthlySalary;
+			}
+			set
+			{
+				monthlySalary = value;
+			}
+		}
+
+		// Override the ToString ( ) method to return all data members
+		public override string ToString()
+		{
+			return "\nEmployee Name: " + name +
+					"\tEmployee ID: " + employeeNumber +
+				   "\tEmployee Hire Date: " + DateOfHire +
+				   "\tEmployee JobDescription: " + JobDescription +
+				   "\tEmployee Department: " + department +
+				   "\tEmployee Monthly Salary: $" + monthlySalary;
+		}
+	}
+
+	// Create a second class to test your Employee class.
+	class TestEmployee
+	{
+		// Main Method 
+		static public void Main(String[] args)
+		{
+
+			Employee[] empList = new Employee[3];
+
+			// Employee 1
+			empList[0] = new Employee();
+			empList[0].EmployeeNumber = 102;
+			empList[0].Name = "Michal";
+			empList[0].DateOfHire = "30/05/2010";
+			empList[0].JobDescription = "Sr. Software Developer";
+			empList[0].Department = "Java";
+			empList[0].MonthlySalary = 35000.00;
+
+			// Employee 2
+			empList[1] = new Employee();
+			empList[1].EmployeeNumber = 103;
+			empList[1].Name = "Alex";
+			empList[1].DateOfHire = "15/06/2015";
+			empList[1].JobDescription = "Software Developer";
+			empList[1].Department = "Java";
+			empList[1].MonthlySalary = 25000.00;
+
+			// Employee 3
+			empList[2] = new Employee();
+			empList[2].EmployeeNumber = 101;
+			empList[2].Name = "Nike";
+			empList[2].DateOfHire = "22/08/2009";
+			empList[2].JobDescription = "Manager";
+			empList[2].Department = "Oracle";
+			empList[2].MonthlySalary = 70000.00;
+
+
+			// This code is used to diplay the employee data in alphabetical order
+			char alphabet = 'a';
+			while (alphabet <= 'z')
+			{
+				foreach (Employee eachEmployee in empList)
+				{
+					if (alphabet == eachEmployee.Name.ToLower()[0])
+					{
+						Console.WriteLine(eachEmployee.ToString());
+					}
+				}
+
+				alphabet++;
+			}
+
+			Console.ReadKey();
+		}
+	}
