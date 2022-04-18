@@ -1,0 +1,45 @@
+7)Use an iterator to iterate through the players in the above example
+
+using System;
+using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FileIoAssignment
+{
+    internal class Player
+    {
+        class Players
+        {
+            public string Players_name { get; set; }
+            public int runs_scored { get; set; }
+            public Players(string p, int r)
+            {
+                this.Players_name = p;
+                this.runs_scored = r;
+            }
+
+        }
+
+        class Teams
+        {
+            static void Main(string[] args)
+            {
+                ArrayList India = new ArrayList();
+                Players p1 = new Players("Suri",60);
+                Players p2 = new Players("sai", 70);
+                Players p3 = new Players("Srinu", 80);
+                India.Add(p1);
+                India.Add(p2);
+                India.Add(p3);
+                foreach (Players p in India) // Iterating returned elements  
+                {
+                    Console.WriteLine(p.Players_name + " " + p.runs_scored);
+                }
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,53 @@
+1)	Create following types of arrays
+a)	Integer
+b)	String
+Use System.Array class to perform following operations on them
+Copy, Sort, Clear, Reverse
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Collections
+{
+    internal class Program
+    { 
+          static void Main(string[] args)
+            {
+               int[] arr = new int[7] { 23,43,65,53,76,89,43 };
+                 
+                int[] arr2 = new int[7];
+                  
+                Console.WriteLine("length of first array: " + arr.Length);
+                 
+                Array.Sort(arr);
+                Console.Write("Sorted array elements: ");
+                  
+                PrintArray(arr);
+                 
+                Console.WriteLine("\nIndex position of 76 is " + Array.IndexOf(arr, 76));
+              
+                Array.Copy(arr, arr2, arr.Length);
+                Console.Write("Second array elements are: ");
+                 
+                PrintArray(arr2);
+                Array.Reverse(arr);
+                Console.Write("\n Print The First Array elements in reverse order: ");
+                PrintArray(arr);
+               
+            }
+            
+            static void PrintArray(int[] arr)
+            {
+                foreach (Object elem in arr)
+                {
+                    Console.Write(elem + " ");
+                }
+            }
+        }
+    }
+
+

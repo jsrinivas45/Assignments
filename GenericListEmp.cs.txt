@@ -1,0 +1,30 @@
+2)Use collection class such as ArrayList to hold more than one employee objects in Employee Management application. 
+Display all Employee details which are stored in collection.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Collections
+{
+    internal class GenericListEmp
+    {       static void Main()
+            {
+                List<string> list = new List<string>();
+                list.Add("Suresh");
+                list.Add("Kumar");
+                list.Add("babu");
+                list.Add("Krishna");
+                list.Add("vardhan");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Console.WriteLine("List of employees" + ':' + list[i]);
+                }
+                Console.WriteLine("total number of employess" + ':' + list.Count);
+                Console.ReadLine();
+            }
+        }
+    }
+
