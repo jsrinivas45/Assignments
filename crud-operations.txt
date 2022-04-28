@@ -1,0 +1,100 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+namespace AdoNetDemo
+{
+    internal class Crud_Ado
+    {
+        static void Main(string[] args)
+        {
+            SqlConnection con;
+            string connectionstring = @"Data Source=DESKTOP-HR22F7H;Initial Catalog=Testing;Integrated Security=True";
+            con = new SqlConnection(connectionstring);
+            con.Open();
+            try
+            {
+                Console.WriteLine("Connecton Established successfully");
+                string ans;
+                do
+                {
+                    Console.WriteLine("select from the option \n1.creation \n2.retrivr \n3.update \ndelete");
+                    int choice = int.Parse(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+
+                            //crate a table
+                            Console.WriteLine("Enter Emp Name:");
+                            string Emp_name = (Console.ReadLine());
+                            int Emp_salary = int.Parse(Console.ReadLine());
+                            string insertqQuery = "insert into Empdata (Emp-name-,Emp-slary) VALUES('" + Emp_name + "'" + Emp_salary + "";
+                            SqlCommand insertcommand = new SqlCommand(insertqQuery, con);
+                            insertcommand.ExecuteNonQuery();
+                            Console.WriteLine("data is inserted successfull");
+                            break;
+                        case 2:
+                            //retrive
+                            string dispalyQuery = "select *from empdata";
+                            SqlCommand displaycommand = new SqlCommand(dispalyQuery, con);
+                            SqlDataReader reader = displaycommand.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("id: " + reader.GetValue(0).ToString());
+                                Console.WriteLine("name: " + reader.GetValue(0).ToString());
+                                Console.WriteLine("salary: " + reader.GetValue(0).ToString());
+
+                            }
+                            reader.Close();
+                            break;
+
+                        case 3:
+
+
+                            //update 
+                            int E_id;
+                            int E_salary;
+                            Console.WriteLine("enter emp_id that you want to update");
+                            E_id = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Enter the emp_salary");
+                            E_salary = int.Parse(Console.ReadLine());
+                            string updateQuery = "update empdata SET Emp_salary =" + E_id + " where Emp_id = " + E_salary + "";
+                            SqlCommand updatecommand = new SqlCommand(updateQuery, con);
+                            updatecommand.ExecuteNonQuery();
+                            Console.WriteLine("data updated sucdessfully");
+                            break;
+
+                        case 4:
+
+                            //deleted
+                            int d_id;
+                            Console.WriteLine("Enter Emp_id that you want delete= ");
+                            d_id = int.Parse(Console.ReadLine());
+                            string deleteQuery = "Delete from empdata where Emp_id= " + d_id;
+                            SqlCommand deletecommand = new SqlCommand(deleteQuery, con);
+                            deletecommand.ExecuteNonQuery();
+                            Console.WriteLine("Deleted Successfully");
+                            break;
+                        default:
+                            Console.WriteLine("wrong input");
+                            break;
+
+                    }
+                    Console.WriteLine("do you want to continue");
+                    ans = Console.ReadLine();
+                }
+                while (ans != "no");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+    }
+}
